@@ -1,0 +1,48 @@
+# https://dnephin.github.io/dobi/index.html
+---
+meta:
+  project: eerorika/circleci
+  default: all
+
+image=alpine-edge:
+  image: '{project}'
+  tags: [alpine-edge]
+  context: alpine
+  args:
+    BASE: 'alpine:edge'
+
+image=alpine-latest:
+  image: '{project}'
+  tags: [alpine-latest]
+  context: alpine
+  args:
+    BASE: 'alpine:latest'
+
+image=debian-slim-unstable:
+  image: '{project}'
+  tags: [debian-slim-unstable]
+  context: debian
+  args:
+    BASE: 'debian:unstable-slim'
+
+image=debian-slim-stable:
+  image: '{project}'
+  tags: [debian-slim-stable]
+  context: debian
+  args:
+    BASE: 'debian:stable-slim'
+
+alias=alpine:
+  tasks:
+    - alpine-edge
+    - alpine-latest
+
+alias=debian-slim:
+  tasks:
+    - debian-slim-unstable
+    - debian-slim-stable
+
+alias=all:
+  tasks:
+    - alpine
+    - debian-slim
